@@ -1,0 +1,30 @@
+<!-- This causes an error -->
+<cdk-virtual-scroll-viewport [itemSize]="20">
+  <ng-container *cdkVirtualFor="let data of list; let idx = index; trackBy: cdkTrackBy">
+    <div *ngIf="data.asHeader() as header">
+      {{header.title}}
+    </div>
+
+    <div *ngIf="data.asItem() as item">
+      <div *ngFor="let entry of item.entries; trackBy: trackBy">
+        {{entry}}
+      </div>
+    </div>
+  </ng-container>
+</cdk-virtual-scroll-viewport>
+<!-- // This causes an error -->
+
+
+<!-- This works fine! -->
+<ng-container *ngFor="let data of list; let idx = index; trackBy: cdkTrackBy">
+  <div *ngIf="data.asHeader() as header">
+    {{header.title}}
+  </div>
+
+  <div *ngIf="data.asItem() as item">
+    <div *ngFor="let entry of item.entries; trackBy: trackBy">
+      {{entry}}
+    </div>
+  </div>
+</ng-container>
+<!-- // This works fine! -->
